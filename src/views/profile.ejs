@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#41414C" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
-    <title>Job Management</title>
+    <title>Profile</title>
 
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/partials/page-header.css" />
@@ -32,26 +32,26 @@
         <img src="https://avatars.githubusercontent.com/u/17316392?s=460&u=6912a91a70bc89745a2079fdcdad3bc3ce370f13&v=4" alt="Jakeliny">
         <h2><%= profile.name %></h2>
         <p>
-          O valor da sua hora é <br/>
-          <strong>R$ 75,00</strong>
+          Your hourly value is <br/>
+          <strong>$ <%= Math.trunc(profile.valueOfHour) %> </strong>
         </p>
-        <button class="button green" form="form-profile" type="submit">Salvar dados</button>
+        <button class="button green" form="form-profile" type="submit">Save data</button>
       </aside>
       <main>
 
-        <form id="form-profile">
+        <form id="form-profile" method="post" action="/profile">
           <fieldset>
-            <legend>Dados do perfil</legend>
+            <legend>Profile Data</legend>
             <div class="separator light"></div>
 
             <div class="input-group">
               <div class="input-wrapper">
-                <label for="name">Nome</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" value="<%= profile.name %>"/>
               </div>
 
               <div class="input-wrapper">
-                <label for="avatar">Link da foto</label>
+                <label for="avatar">Photo Link</label>
                 <input 
                 placeholder="https://"
                 type="url" 
@@ -64,25 +64,25 @@
           </fieldset>
 
           <fieldset>
-            <legend>Planejamento</legend>
+            <legend>Planning</legend>
             <div class="separator light"> </div>
 
             <div class="input-group">
               <div class="input-wrapper">
-                <label for="monthly-budget">Quanto eu <br/>quero ganhar por mês?</label>
+                <label for="monthly-budget">How much <br/>do you want to earn per month?</label>
                 <input 
                   type="amount"
                   step="0.1" 
                   id="monthly-budget" 
                   name="monthly-budget" 
-                  placeholder="R$"
+                  placeholder="$"
                   value="<%= profile["monthly-budget"] %>"
                   />
               </div>
 
               <div class="input-wrapper">
-                <label for="hours-per-day">Quantas horas <br/>
-                  quero trabalhar por dia?</label>
+                <label for="hours-per-day">How many hours <br/>
+                  do you want to work per day?</label>
                 <input 
                   type="number"
                   id="hours-per-day" 
@@ -94,8 +94,8 @@
 
             <div class="input-group">
               <div class="input-wrapper">
-                <label for="days-per-week">Quantos dias <br/>quero
-                  trabalhar por semana?</label>
+                <label for="days-per-week">How many days <br/>
+                  will you work per week?</label>
                 <input
                   type="number"
                   id="days-per-week" 
@@ -105,8 +105,8 @@
               </div>
 
               <div class="input-wrapper">
-                <label for="vacation-per-year">Quantas semanas <br/>
-                  por ano você quer tirar férias?</label>
+                <label for="vacation-per-year">How many weeks <br/>
+                  per year do you want to take a vacation?</label>
                 <input 
                   type="number" 
                   id="vacation-per-year" 
