@@ -12,7 +12,7 @@ module.exports = {
         const totalHoursOfWeek = data["hours-per-day"] * data["days-per-week"];
         const totalHoursOfMonth = totalHoursOfWeek * weeksPerMonth;
 
-        data.valueOfHour = data["monthly-budget"] / totalHoursOfMonth;
+        data.valueOfHour = Math.trunc((data["monthly-budget"] / totalHoursOfMonth));
 
         Profile.update(data);
 

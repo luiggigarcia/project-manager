@@ -29,11 +29,11 @@
 
     <div class="container animate-up delay-2">
       <aside class="card">
-        <img src="https://avatars.githubusercontent.com/u/17316392?s=460&u=6912a91a70bc89745a2079fdcdad3bc3ce370f13&v=4" alt="Jakeliny">
+        <img src="<%= profile.avatar %>" alt="<%= profile.name %>">
         <h2><%= profile.name %></h2>
         <p>
           Your hourly value is <br/>
-          <strong>$ <%= Math.trunc(profile.valueOfHour) %> </strong>
+          <strong>$ <%= profile.valueOfHour %> </strong>
         </p>
         <button class="button green" form="form-profile" type="submit">Save data</button>
       </aside>
@@ -57,7 +57,7 @@
                 type="url" 
                 id="avatar" 
                 name="avatar"
-                value="<%= profile.avatar %>" 
+                value="<%= profile.avatar %>"
                 />
               </div>
             </div>

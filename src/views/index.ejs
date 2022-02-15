@@ -33,12 +33,14 @@
         <img id="logo" src="/images/logo.svg" alt="Logo" />
         <span id="notification">
           <img src="/images/alert-octagon.svg" alt="Alerta" />
-          You have two free hours in your day
+          <% if (freeHours <= 0) { %>
+            You don't have free hours in your day
+          <% } else { %> You have <%= freeHours %> free hours in your day  <% } %> 
         </span>
         <a href="/profile" id="avatar-profile">
-          <p>Luiggi <span>See profile</span></p>
+          <p><%= profile.name %>  <span>See profile</span></p>
           <img
-            src="https://avatars.githubusercontent.com/u/17316392?s=460&u=6912a91a70bc89745a2079fdcdad3bc3ce370f13&v=4" />
+            src="<%= profile.avatar %> " />
         </a>
       </section>
 
@@ -49,15 +51,15 @@
 
         <div class="info">
           <div class="total">
-            <strong>12</strong>
+            <strong><%= status.total %> </strong>
             Total of Projects
           </div>
           <div class="in-progress">
-            <strong>7</strong>
+            <strong><%= status.progress %> </strong>
             In Progress
           </div>
           <div class="finished">
-            <strong>4</strong>
+            <strong><%= status.done %> </strong>
             Closed
           </div>
         </div>
@@ -76,7 +78,7 @@
       <h1 class="sr-only">Jobs</h1>
       <% for (const job of jobs) { %>
         <div class="cards">
-          <div class="card <%= job.status %> " data-id="1">
+          <div class="card <%= job.cssClass %> " data-id="1">
             <div class="id column">
               <%= job.id %>
             </div>
@@ -86,7 +88,7 @@
             <div class="deadline column">
               <span>Deadline</span>
               <p>
-                <% if (job.status === "done" ) { %>
+                <% if (job.cssClass === "done" || job.remainingDays <= 0 ) { %>
                   <%= "Deadline closed" %>
                     <% } else { %>
                       <%= `${job.remainingDays} days` %>
@@ -99,7 +101,7 @@
               </p>
             </div>
             <div class="status badge column">
-              <%= job.status == "done" ? "Closed" : "In Progress" %>
+              <%= job.cssClass == "done" ? "Closed" : "In Progress" %>
             </div>
             <div class="actions column flex">
               <p class="sr-only">Actions</p>
