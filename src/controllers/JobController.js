@@ -7,13 +7,10 @@ module.exports = {
         res.render("job");
     },
     
-    insert(req, res) {
+    async insert(req, res) {
         const data = req.body;
-        const job_data = Job.get();
-        const job_id = job_data.length === 0 ? 1 : job_data.length + 1;
-
+       
         Job.insert({
-            id: job_id,
             name: data.name,
             "daily-hours": data["daily-hours"],
             "total-hours": data["total-hours"],
@@ -24,33 +21,33 @@ module.exports = {
     },
     
     
-    edit(req, res) {
-        const job_data = Job.get();
-        const profile_data = Profile.get();
+    async edit(req, res) {
+        const job_data = await Job.get();
+        const profile_data = await Profile.get();
         const id = Number(req.params.id);
         const job = job_data.find(job => job.id === id);
-        job.budget = utils.calculateBudget(job, profile_data.valueOfHour);
+        job.budget = utils.calculateBudget(job, profile_data["value-hour"]);
     
         res.render("job-edit", { job });
     },
     
-    update(req, res) {
-        const job_data = Job.get();
-        const profile_data = Profile.get();
+    async update(req, res) {
+        const job_data = await Job.get();
+        const profile_data = await Profile.get();
         const data = req.body;
         const id = Number(req.params.id);
-        const jobIndex = job_data.findIndex(job => job.id === id);
+
         const job = job_data.find(job => job.id === id);
 
-        const updatedJob = {
-            ...job,
+        const newData = {
+            id,
             name: data.name,
             ["daily-hours"]: data["daily-hours"],
             ["total-hours"]: data["total-hours"],
-            budget: utils.calculateBudget(job, profile_data.valueOfHour)
+            budget: utils.calculateBudget(job, profile_data["value-hour"])
         };
 
-        Job.update(updatedJob, jobIndex);
+        Job.update(newData);
     
         res.redirect(`/job/${id}`);
     },

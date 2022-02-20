@@ -1,8 +1,8 @@
 const Profile = require("../model/Profile");
 
 module.exports = {
-    create(req, res) {
-        res.render("profile", { profile: Profile.get() })
+    async create(req, res) {
+        res.render("profile", { profile: await Profile.get() })
     },
 
     update(req, res) {
@@ -12,7 +12,7 @@ module.exports = {
         const totalHoursOfWeek = data["hours-per-day"] * data["days-per-week"];
         const totalHoursOfMonth = totalHoursOfWeek * weeksPerMonth;
 
-        data.valueOfHour = Math.trunc((data["monthly-budget"] / totalHoursOfMonth));
+        data["value-hour"] = Math.trunc((data["monthly-budget"] / totalHoursOfMonth));
 
         Profile.update(data);
 

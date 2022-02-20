@@ -3,9 +3,9 @@ const Profile = require('../model/Profile');
 const utils = require('../utils/jobUtils');
 
 module.exports = {
-    dashboard(req, res) {
-        const job_data = Job.get();
-        const profile_data = Profile.get();
+    async dashboard(req, res) {
+        const job_data = await Job.get();
+        const profile_data = await Profile.get();
         const status = {
             total: job_data.length,
             progress: 0,
@@ -13,7 +13,6 @@ module.exports = {
         };
 
         let freeHours = 0;
-        // hours-per-day - daily-hours
 
         const jobs = job_data.map(job => {
             const remainingDays = utils.remainingDaysOfJob(job);
@@ -24,7 +23,7 @@ module.exports = {
             return {
                 ...job,
                 remainingDays,
-                budget: utils.calculateBudget(job, profile_data.valueOfHour),
+                budget: utils.calculateBudget(job, profile_data["value-hour"]),
                 cssClass
             }
         });

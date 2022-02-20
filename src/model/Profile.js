@@ -1,19 +1,31 @@
-let data =  {
-    name: "Luiggi",
-    avatar: "https://source.unsplash.com/random",
-    "monthly-budget": 4500,
-    "hours-per-day": 5,
-    "days-per-week": 5,
-    "vacation-per-year": 10,
-    valueOfHour: 90
-};
+const Database = require('../db/config');
 
 module.exports = {
-    get() {
-        return data;
+    async get() {
+        const db = await Database();
+        const data = await db.get("SELECT * FROM profile");
+
+        await db.close();
+
+        return {
+            id: data.id,
+            name: data.name,
+            avatar: data.avatar,
+            ["hours-per-day"]: data.hours_per_day,
+            ["days-per-week"]: data.days_per_week,
+            ["vacation-per-year"]: data.vacation_per_year,
+            ["value-hour"]: data.value_hour,
+            ["monthly-budget"]: data.monthly_budget
+        }
+
     },
 
-    update(newData) {
-        data = newData;
+    async update(data) {
+        const db = await Database();
+        db.run(`UPDATE profile SET name = "${data.name}", avatar = "${data.avatar}", hours_per_day = ${data["hours-per-day"]}, 
+        days_per_week = ${data["days-per-week"]}, vacation_per_year = ${data["vacation-per-year"]}, monthly_budget = ${data["monthly-budget"]}`);
+        await db.close()
     }
 };
+
+
