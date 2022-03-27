@@ -2,7 +2,7 @@
 
 <img src="https://github.com/luiggigarcia/job-management/blob/main/public/images/demo.png" alt="Demonstration">
 
-> The project is a management application for jobs and budget calculating. 
+> This project is an application for the job management, also is possible to make the calculus of job hours.
 
 
 
