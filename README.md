@@ -1,4 +1,4 @@
-# Job Management
+# Job Manager
 
 <img src="https://github.com/luiggigarcia/job-management/blob/main/public/images/demo.png" alt="Demonstration">
 
