@@ -1,8 +1,6 @@
-# Job Manager
-
+# Project Manager
+> Created to facilate the project management. The application have main focus on the backend development with languages and technologies: Node.js, JavaScript, EJS Template Engine, Express, SQLite, HTML5 and CSS3.
 <img src="https://github.com/luiggigarcia/job-management/blob/main/public/images/demo.png" alt="Demonstration">
-
-> This project is an application for the job management, also is possible to make the calculus of job hours.
 
 
 
